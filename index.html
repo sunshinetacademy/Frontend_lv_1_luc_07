@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحاضرة السابعة | Typography + Box Model | Sunshine T Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4A7C59;
+            --primary-dark: #2D5F3F;
+            --primary-light: #7BA889;
+            --primary-soft: #D4E5D8;
+
+            --secondary: #D4A574;
+            --secondary-dark: #B8895A;
+            --secondary-light: #E8C9A0;
+
+            --bg-main: #FAF7F2;
+            --bg-cream: #F5EFE6;
+            --bg-card: #FFFFFF;
+            --bg-soft: #EDE5D8;
+            --bg-code: #F9F6F0;
+
+            --text-dark: #2C1810;
+            --text-body: #4A3728;
+            --text-muted: #6B5744;
+            --text-light: #8B7356;
+
+            --border: #E5DCC8;
+            --border-soft: #EDE5D8;
+
+            --success: #5B8C5A;
+            --success-bg: #E3EDDF;
+            --info: #5B8BA0;
+            --info-bg: #DEE8EC;
+            --warning: #C89B6C;
+            --warning-bg: #F0E4D4;
+            --danger: #B85C5C;
+            --danger-bg: #F0DCDC;
+            --purple: #8B7BA8;
+            --purple-bg: #E5DFED;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #FAF7F2 0%, #EDE5D8 100%);
+            border-bottom: 3px solid var(--primary);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(74, 124, 89, 0.08);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.25);
+        }
+
+        .lecture-badge {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .hero {
+            padding: 70px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #D4E5D8 0%, #E8C9A0 50%, #F5EFE6 100%);
+            border: 2px solid var(--primary-light);
+            border-radius: 24px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(74, 124, 89, 0.12);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--primary-dark);
+            color: var(--secondary-light);
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 18px;
+            color: var(--text-dark);
+            line-height: 1.3;
+            position: relative;
+        }
+
+        .hero h1 span {
+            color: var(--primary-dark);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        section {
+            margin: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--border);
+        }
+
+        .section-title .title-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            color: white;
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.2);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 124, 89, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 8px 24px rgba(74, 124, 89, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: var(--text-body);
+            margin-bottom: 12px;
+        }
+
+        .card strong {
+            color: var(--text-dark);
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .objective-item {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-right: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .objective-item:hover {
+            border-color: var(--primary-light);
+            border-right-color: var(--secondary);
+            background: var(--bg-cream);
+        }
+
+        .objective-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(74, 124, 89, 0.25);
+        }
+
+        .objective-item h4 {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .objective-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .review-box {
+            background: linear-gradient(135deg, var(--purple-bg) 0%, #F5F3FF 100%);
+            border: 2px solid var(--purple);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 30px 0;
+        }
+
+        .review-box h3 {
+            color: var(--purple);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .review-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .review-list li {
+            background: var(--bg-card);
+            border: 1px solid #D4C9E8;
+            border-radius: 10px;
+            padding: 12px 16px;
+            padding-right: 40px;
+            position: relative;
+            color: var(--text-body);
+        }
+
+        .review-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--purple);
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-soft) 100%);
+            border: 2px dashed var(--secondary);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 30px 0;
+        }
+
+        .analogy-box h3 {
+            color: var(--secondary-dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .analogy-list {
+            list-style: none;
+        }
+
+        .analogy-list li {
+            padding: 12px 0;
+            padding-right: 40px;
+            position: relative;
+            color: var(--text-body);
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .analogy-list li:last-child {
+            border-bottom: none;
+        }
+
+        .analogy-list li::before {
+            content: '💡';
+            position: absolute;
+            right: 0;
+            top: 12px;
+            font-size: 1.2rem;
+        }
+
+        .analogy-list li strong {
+            color: var(--primary-dark);
+        }
+
+        .code-wrapper {
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            background: var(--bg-code);
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.06);
+        }
+
+        .code-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-lang {
+            background: var(--text-dark);
+            color: var(--secondary-light);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .code-dots span:nth-child(1) { background: #E8A5A5; }
+        .code-dots span:nth-child(2) { background: #E8D4A0; }
+        .code-dots span:nth-child(3) { background: #A5D4B0; }
+
+        pre {
+            padding: 20px;
+            overflow-x: auto;
+            margin: 0;
+            background: var(--bg-code);
+        }
+
+        pre code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            display: block;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .selector { color: #8B2252; font-weight: 700; }
+        .property { color: #0550AE; }
+        .css-value { color: #116329; }
+        .css-number { color: #0550AE; }
+        .css-unit { color: #953800; }
+        .css-color-val { color: #6639BA; }
+        .punctuation { color: #6B5744; }
+        .comment { color: #8B7356; font-style: italic; }
+
+        .info-box {
+            background: var(--info-bg);
+            border: 2px solid #B8D4DE;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            color: #2E6B8A;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .info-box p {
+            color: #1F4A5E;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border: 2px solid #E5D4B8;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            color: var(--secondary-dark);
+            margin-bottom: 8px;
+        }
+
+        .warning-box p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .success-box {
+            background: var(--success-bg);
+            border: 2px solid #B8D4B5;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .success-box h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .success-box p {
+            color: #2D5F3F;
+            font-size: 0.95rem;
+        }
+
+        .danger-box {
+            background: var(--danger-bg);
+            border: 2px solid #E0B8B8;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .danger-box h4 {
+            color: #8B3A3A;
+            margin-bottom: 8px;
+        }
+
+        .danger-box p {
+            color: #5C2828;
+            font-size: 0.95rem;
+        }
+
+        .element-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .element-table thead {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .element-table th {
+            padding: 14px 18px;
+            text-align: right;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .element-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border-soft);
+            color: var(--text-body);
+        }
+
+        .element-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .element-table tr:hover {
+            background: var(--bg-cream);
+        }
+
+        .element-table code {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: var(--primary-dark);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .tag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .tag-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .tag-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 124, 89, 0.1);
+        }
+
+        .tag-card .tag-name {
+            font-family: 'Fira Code', monospace;
+            background: var(--bg-code);
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            direction: ltr;
+        }
+
+        .tag-card h5 {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .tag-card p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        /* Box Model Visual */
+        .box-model-visual {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .box-model-diagram {
+            display: inline-block;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .box-margin {
+            background: #F0DCDC;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .box-margin::before {
+            content: 'margin';
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            color: #8B3A3A;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .box-border {
+            background: #E8C9A0;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .box-border::before {
+            content: 'border';
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: #8B5A2B;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .box-padding {
+            background: #D4E5D8;
+            padding: 25px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .box-padding::before {
+            content: 'padding';
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: #2D5F3F;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .box-content {
+            background: var(--bg-card);
+            border: 2px dashed var(--primary);
+            padding: 20px 40px;
+            border-radius: 4px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Font Demo */
+        .font-demo {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .font-demo .demo-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            font-family: 'Fira Code', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .font-demo .demo-text {
+            color: var(--text-dark);
+            padding: 10px;
+            background: var(--bg-cream);
+            border-radius: 8px;
+        }
+
+        /* Text Align Demo */
+        .text-align-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .text-align-box {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-align-box .label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Debug Section */
+        .debug-box {
+            background: var(--danger-bg);
+            border: 2px solid var(--danger);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 30px 0;
+        }
+
+        .debug-box h3 {
+            color: #8B3A3A;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .debug-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .debug-wrong, .debug-right {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .debug-wrong {
+            border: 2px solid var(--danger);
+        }
+
+        .debug-right {
+            border: 2px solid var(--success);
+        }
+
+        .debug-label {
+            padding: 8px 15px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .debug-wrong .debug-label {
+            background: var(--danger);
+            color: white;
+        }
+
+        .debug-right .debug-label {
+            background: var(--success);
+            color: white;
+        }
+
+        .debug-wrong pre, .debug-right pre {
+            background: var(--bg-card);
+            padding: 15px;
+            margin: 0;
+        }
+
+        .quiz-section {
+            background: var(--bg-card);
+            border: 3px solid var(--success);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(91, 140, 90, 0.1);
+        }
+
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px dashed var(--success-bg);
+        }
+
+        .quiz-header-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--success) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(91, 140, 90, 0.25);
+        }
+
+        .quiz-header h2 {
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+        }
+
+        .quiz-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .question {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            border-color: var(--primary-light);
+            background: var(--bg-soft);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(74, 124, 89, 0.25);
+        }
+
+        .question h4 {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .options {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .options li {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .options li:hover {
+            border-color: var(--primary-light);
+            background: var(--bg-cream);
+            color: var(--text-dark);
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            background: var(--bg-soft);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+            flex-shrink: 0;
+        }
+
+        .homework-section {
+            background: var(--bg-card);
+            border: 3px solid var(--info);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(91, 139, 160, 0.1);
+        }
+
+        .homework-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px dashed var(--info-bg);
+        }
+
+        .homework-header-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--info) 0%, #3D6B80 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(91, 139, 160, 0.25);
+        }
+
+        .homework-header h2 {
+            color: #2E6B8A;
+            font-size: 1.6rem;
+        }
+
+        .homework-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .homework-item {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-right: 5px solid var(--info);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .homework-item:hover {
+            border-color: var(--info);
+            background: var(--info-bg);
+        }
+
+        .homework-item h4 {
+            color: #2E6B8A;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .homework-item p {
+            color: var(--text-body);
+            margin-bottom: 10px;
+        }
+
+        .homework-item ul {
+            list-style: none;
+            padding-right: 0;
+        }
+
+        .homework-item ul li {
+            padding: 6px 0;
+            padding-right: 25px;
+            position: relative;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .homework-item ul li::before {
+            content: '◆';
+            position: absolute;
+            right: 0;
+            color: var(--info);
+            font-size: 0.7rem;
+            top: 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary-soft) 0%, var(--bg-soft) 100%);
+            border: 3px solid var(--primary);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(74, 124, 89, 0.1);
+        }
+
+        .summary-box h3 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            color: var(--text-body);
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .summary-list li:last-child {
+            border-bottom: none;
+        }
+
+        .summary-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .next-box {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-soft) 100%);
+            border: 2px dashed var(--secondary);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .next-box h3 {
+            color: var(--secondary-dark);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .next-box p {
+            color: var(--text-body);
+            font-size: 1.05rem;
+        }
+
+        .next-box .next-topic {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-soft) 100%);
+            border-top: 3px solid var(--primary);
+            padding: 40px 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        footer .logo {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        footer .motto {
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        code.inline {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 5px;
+            color: var(--primary-dark);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.5cm;
+            }
+
+            body {
+                background: white;
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+
+            header {
+                position: static;
+                box-shadow: none;
+            }
+
+            .hero, section, .card, .question, .homework-item {
+                page-break-inside: avoid;
+            }
+
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+            }
+
+            .code-wrapper {
+                page-break-inside: avoid;
+            }
+
+            .debug-comparison, .text-align-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 1.5rem; }
+            .objectives-grid { grid-template-columns: 1fr; }
+            .tag-grid { grid-template-columns: 1fr; }
+            .debug-comparison { grid-template-columns: 1fr; }
+            .text-align-demo { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">S</div>
+                    <span>Sunshine T Academy</span>
+                </div>
+                <div class="lecture-badge">Frontend Level 1 • المحاضرة السابعة</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section class="hero">
+            <span class="hero-tag">LECTURE 07</span>
+            <h1><span>Typography</span> + Box Model</h1>
+            <p>هنشوف إزاي نتحكم في الخطوط والنصوص بشكل احترافي، ونفهم أهم مفهوم في CSS: Box Model — الأساس اللي بيتبنى عليه كل تصميم.</p>
+        </section>
+
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🔄</div>
+                <span>مراجعة سريعة</span>
+            </h2>
+
+            <div class="review-box">
+                <h3>📚 من المحاضرة اللي فاتت</h3>
+                <ul class="review-list">
+                    <li>CSS = Cascading Style Sheets</li>
+                    <li>External CSS هو الأفضل</li>
+                    <li>Selectors: Element, Class, ID, Universal, Grouping, Descendant</li>
+                    <li>Specificity: Inline > ID > Class > Element</li>
+                    <li>Colors: HEX, RGB, RGBA, HSL</li>
+                    <li>Units: px, %, em, rem, vw, vh</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>🎯 هدف النهاردة</h4>
+                <p>النهاردة هنبدأ نتعمق في CSS أكتر. هنتعلم إزاي نتحكم في <strong>الخطوط والنصوص (Typography)</strong> بشكل احترافي، وبعدها هنفهم <strong>Box Model</strong> — وهو أهم مفهوم في CSS كله، لأن كل عنصر في الصفحة هو "صندوق" (Box).</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎯</div>
+                <span>الأهداف التعليمية</span>
+            </h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">في نهاية المحاضرة، الطالب هيقدر:</p>
+
+            <div class="objectives-grid">
+                <div class="objective-item">
+                    <div class="objective-number">1</div>
+                    <div>
+                        <h4>التحكم في الخطوط</h4>
+                        <p>font-family, font-size, font-weight, font-style</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">2</div>
+                    <div>
+                        <h4>تنسيق النصوص</h4>
+                        <p>line-height, letter-spacing, text-align, text-decoration, text-transform</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">3</div>
+                    <div>
+                        <h4>استخدام Google Fonts</h4>
+                        <p>إضافة خطوط ويب احترافية</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">4</div>
+                    <div>
+                        <h4>فهم Box Model</h4>
+                        <p>Content, Padding, Border, Margin</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">5</div>
+                    <div>
+                        <h4>Box-sizing</h4>
+                        <p>content-box vs border-box</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">6</div>
+                    <div>
+                        <h4>Margin Collapse</h4>
+                        <p>فهم سلوك الـ Margin بين العناصر</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PART 1: TYPOGRAPHY ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🔤</div>
+                <span>الجزء الأول: Typography — الخطوط والنصوص</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هي Typography؟</h3>
+                <p><strong>Typography</strong> هو فن وعلم تنسيق النصوص. في CSS، بنستخدم خصائص عشان نتحكم في:</p>
+                <p>• نوع الخط (Font Family)</p>
+                <p>• حجم الخط (Font Size)</p>
+                <p>• سمك الخط (Font Weight)</p>
+                <p>• مائل/عادي (Font Style)</p>
+                <p>• المسافة بين السطور (Line Height)</p>
+                <p>• المسافة بين الحروف (Letter Spacing)</p>
+                <p>• محاذاة النص (Text Align)</p>
+                <p>• زخرفة النص (Text Decoration)</p>
+                <p>• تحويل النص (Text Transform)</p>
+            </div>
+
+            <!-- Font Family -->
+            <div class="card">
+                <h3>🔹 1. Font Family — نوع الخط</h3>
+                <p>بتحدد نوع الخط المستخدم. ممكن تحدد أكتر من خط كـ "fallback" لو الأول مش متاح.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Font Family</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* خط واحد */</span>
+<span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">Arial</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* قائمة خطوط (fallback) */</span>
+<span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">'Cairo', Arial, sans-serif</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* أنواع الخطوط العامة */</span>
+<span class="selector">.serif</span> <span class="punctuation">{</span> <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">serif</span><span class="punctuation">;</span> <span class="punctuation">}</span>        <span class="comment">/* Times, Georgia */</span>
+<span class="selector">.sans</span> <span class="punctuation">{</span> <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">sans-serif</span><span class="punctuation">;</span> <span class="punctuation">}</span>  <span class="comment">/* Arial, Helvetica */</span>
+<span class="selector">.mono</span> <span class="punctuation">{</span> <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">monospace</span><span class="punctuation">;</span> <span class="punctuation">}</span>    <span class="comment">/* Courier, Consolas */</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-family: serif</div>
+                <div class="demo-text" style="font-family: Georgia, serif; font-size: 1.2rem;">مرحباً بيك في عالم الخطوط — Hello World</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-family: sans-serif</div>
+                <div class="demo-text" style="font-family: Arial, sans-serif; font-size: 1.2rem;">مرحباً بيك في عالم الخطوط — Hello World</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-family: monospace</div>
+                <div class="demo-text" style="font-family: 'Courier New', monospace; font-size: 1.2rem;">مرحباً بيك في عالم الخطوط — Hello World</div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ قاعدة مهمة</h4>
+                <p>دايماً حط <strong>generic family</strong> في آخر القائمة (serif, sans-serif, monospace). لو كل الخطوط المحددة مش موجودة، المتصفح هيستخدم الخط الافتراضي من النوع ده.</p>
+            </div>
+
+            <!-- Font Size -->
+            <div class="card">
+                <h3>🔹 2. Font Size — حجم الخط</h3>
+                <p>بيتحكم في حجم النص. استخدمنا في المحاضرة اللي فاتت وحدات زي px و rem.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Font Size</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">h1</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">2.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>  <span class="comment">/* 40px */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">h2</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>     <span class="comment">/* 32px */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">p</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">rem</span><span class="punctuation">;</span>      <span class="comment">/* 16px — الافتراضي */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.small</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">0.875</span><span class="css-unit">rem</span><span class="punctuation">;</span> <span class="comment">/* 14px */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ أفضل الممارسات</h4>
+                <p>• استخدم <code class="inline">rem</code> لحجم الخط عشان يبقى متجاوب.</p>
+                <p>• الحجم الافتراضي في المتصفح = <code class="inline">16px</code> = <code class="inline">1rem</code>.</p>
+                <p>• متستخدمش حجم أقل من <code class="inline">0.875rem</code> (14px) للنص العادي.</p>
+            </div>
+
+            <!-- Font Weight -->
+            <div class="card">
+                <h3>🔹 3. Font Weight — سمك الخط</h3>
+                <p>بيتحكم في سمك/خفة الخط. من 100 (خفيف جداً) لـ 900 (عريض جداً).</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Font Weight</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.light</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">300</span><span class="punctuation">;</span> <span class="punctuation">}</span>      <span class="comment">/* خفيف */</span>
+<span class="selector">.normal</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">400</span><span class="punctuation">;</span> <span class="punctuation">}</span>     <span class="comment">/* عادي (default) */</span>
+<span class="selector">.medium</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">500</span><span class="punctuation">;</span> <span class="punctuation">}</span>     <span class="comment">/* متوسط */</span>
+<span class="selector">.bold</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">700</span><span class="punctuation">;</span> <span class="punctuation">}</span>       <span class="comment">/* عريض (bold) */</span>
+<span class="selector">.black</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">900</span><span class="punctuation">;</span> <span class="punctuation">}</span>      <span class="comment">/* عريض جداً */</span>
+
+<span class="comment">/* كلمات مفتاحية */</span>
+<span class="selector">.normal2</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-value">normal</span><span class="punctuation">;</span> <span class="punctuation">}</span>  <span class="comment">/* = 400 */</span>
+<span class="selector">.bold2</span> <span class="punctuation">{</span> <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-value">bold</span><span class="punctuation">;</span> <span class="punctuation">}</span>      <span class="comment">/* = 700 */</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-weight: 300 (light)</div>
+                <div class="demo-text" style="font-weight: 300;">مرحباً بيك — Hello World</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-weight: 400 (normal)</div>
+                <div class="demo-text" style="font-weight: 400;">مرحباً بيك — Hello World</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-weight: 700 (bold)</div>
+                <div class="demo-text" style="font-weight: 700;">مرحباً بيك — Hello World</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-weight: 900 (black)</div>
+                <div class="demo-text" style="font-weight: 900;">مرحباً بيك — Hello World</div>
+            </div>
+
+            <!-- Font Style -->
+            <div class="card">
+                <h3>🔹 4. Font Style — مائل/عادي</h3>
+                <p>بيتحكم في ميلان النص.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Font Style</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.normal</span> <span class="punctuation">{</span> <span class="property">font-style</span><span class="punctuation">:</span> <span class="css-value">normal</span><span class="punctuation">;</span> <span class="punctuation">}</span>   <span class="comment">/* عادي */</span>
+<span class="selector">.italic</span> <span class="punctuation">{</span> <span class="property">font-style</span><span class="punctuation">:</span> <span class="css-value">italic</span><span class="punctuation">;</span> <span class="punctuation">}</span>   <span class="comment">/* مائل */</span>
+<span class="selector">.oblique</span> <span class="punctuation">{</span> <span class="property">font-style</span><span class="punctuation">:</span> <span class="css-value">oblique</span><span class="punctuation">;</span> <span class="punctuation">}</span> <span class="comment">/* مائل بقوة */</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-style: normal</div>
+                <div class="demo-text" style="font-style: normal;">مرحباً بيك في عالم الخطوط</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">font-style: italic</div>
+                <div class="demo-text" style="font-style: italic;">مرحباً بيك في عالم الخطوط</div>
+            </div>
+
+            <!-- Line Height -->
+            <div class="card">
+                <h3>🔹 5. Line Height — المسافة بين السطور</h3>
+                <p>بيتحكم في المسافة العمودية بين السطور. مهم جداً لسهولة القراءة.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Line Height</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.tight</span> <span class="punctuation">{</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="punctuation">;</span>      <span class="comment">/* مضغوط */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.normal</span> <span class="punctuation">{</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">1.5</span><span class="punctuation">;</span>    <span class="comment">/* عادي — الأفضل */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.loose</span> <span class="punctuation">{</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="punctuation">;</span>      <span class="comment">/* واسع */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ممكن نستخدم px كمان */</span>
+<span class="selector">.fixed</span> <span class="punctuation">{</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">24</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">line-height: 1 (tight)</div>
+                <div class="demo-text" style="line-height: 1;">هذا نص تجريبي لبيان المسافة بين السطور.<br>هذا السطر الثاني لبيان الفرق.<br>هذا السطر الثالث.</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">line-height: 1.5 (normal)</div>
+                <div class="demo-text" style="line-height: 1.5;">هذا نص تجريبي لبيان المسافة بين السطور.<br>هذا السطر الثاني لبيان الفرق.<br>هذا السطر الثالث.</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">line-height: 2 (loose)</div>
+                <div class="demo-text" style="line-height: 2;">هذا نص تجريبي لبيان المسافة بين السطور.<br>هذا السطر الثاني لبيان الفرق.<br>هذا السطر الثالث.</div>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ أفضل الممارسات</h4>
+                <p>• استخدم قيمة بدون وحدة (unitless) زي <code class="inline">1.5</code> أو <code class="inline">1.6</code>.</p>
+                <p>• القيمة المثالية للنصوص الطويلة: <code class="inline">1.5</code> إلى <code class="inline">1.8</code>.</p>
+                <p>• للعناوين: <code class="inline">1.1</code> إلى <code class="inline">1.3</code>.</p>
+            </div>
+
+            <!-- Letter Spacing -->
+            <div class="card">
+                <h3>🔹 6. Letter Spacing — المسافة بين الحروف</h3>
+                <p>بيتحكم في المسافة الأفقية بين الحروف.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Letter Spacing</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.tight</span> <span class="punctuation">{</span>
+    <span class="property">letter-spacing</span><span class="punctuation">:</span> <span class="css-number">-1</span><span class="css-unit">px</span><span class="punctuation">;</span>  <span class="comment">/* حروف متلاصقة */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.normal</span> <span class="punctuation">{</span>
+    <span class="property">letter-spacing</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>     <span class="comment">/* عادي */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.wide</span> <span class="punctuation">{</span>
+    <span class="property">letter-spacing</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span><span class="punctuation">;</span>   <span class="comment">/* حروف متباعدة */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">letter-spacing: -1px</div>
+                <div class="demo-text" style="letter-spacing: -1px; font-size: 1.3rem;">مرحباً بيك — HELLO WORLD</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">letter-spacing: 0 (normal)</div>
+                <div class="demo-text" style="letter-spacing: 0; font-size: 1.3rem;">مرحباً بيك — HELLO WORLD</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">letter-spacing: 3px</div>
+                <div class="demo-text" style="letter-spacing: 3px; font-size: 1.3rem;">مرحباً بيك — HELLO WORLD</div>
+            </div>
+
+            <!-- Text Align -->
+            <div class="card">
+                <h3>🔹 7. Text Align — محاذاة النص</h3>
+                <p>بيتحكم في محاذاة النص أفقياً.</p>
+            </div>
+
+            <div class="text-align-demo">
+                <div class="text-align-box">
+                    <div class="label">text-align: left</div>
+                    <div style="text-align: left; background: var(--bg-cream); padding: 10px; border-radius: 6px;">نص محاذاة لليسار<br>السطر الثاني</div>
+                </div>
+                <div class="text-align-box">
+                    <div class="label">text-align: center</div>
+                    <div style="text-align: center; background: var(--bg-cream); padding: 10px; border-radius: 6px;">نص في الوسط<br>السطر الثاني</div>
+                </div>
+                <div class="text-align-box">
+                    <div class="label">text-align: right</div>
+                    <div style="text-align: right; background: var(--bg-cream); padding: 10px; border-radius: 6px;">نص محاذاة لليمين<br>السطر الثاني</div>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Text Align</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.left</span> <span class="punctuation">{</span> <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">left</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.center</span> <span class="punctuation">{</span> <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">center</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.right</span> <span class="punctuation">{</span> <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">right</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.justify</span> <span class="punctuation">{</span> <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">justify</span><span class="punctuation">;</span> <span class="punctuation">}</span> <span class="comment">/* يملأ السطر */</span></code></pre>
+            </div>
+
+            <!-- Text Decoration -->
+            <div class="card">
+                <h3>🔹 8. Text Decoration — زخرفة النص</h3>
+                <p>بيتحكم في الخطوط اللي بتظهر على النص (تحتي، يتوسطه، فوقه).</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Text Decoration</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.underline</span> <span class="punctuation">{</span>
+    <span class="property">text-decoration</span><span class="punctuation">:</span> <span class="css-value">underline</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.line-through</span> <span class="punctuation">{</span>
+    <span class="property">text-decoration</span><span class="punctuation">:</span> <span class="css-value">line-through</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.overline</span> <span class="punctuation">{</span>
+    <span class="property">text-decoration</span><span class="punctuation">:</span> <span class="css-value">overline</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.none</span> <span class="punctuation">{</span>
+    <span class="property">text-decoration</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span> <span class="comment">/* لإزالة خط الروابط */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">text-decoration: underline</div>
+                <div class="demo-text" style="text-decoration: underline; font-size: 1.2rem;">نص بخط تحتي</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">text-decoration: line-through</div>
+                <div class="demo-text" style="text-decoration: line-through; font-size: 1.2rem;">نص بخط في الوسط</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">text-decoration: overline</div>
+                <div class="demo-text" style="text-decoration: overline; font-size: 1.2rem;">نص بخط فوقي</div>
+            </div>
+
+            <!-- Text Transform -->
+            <div class="card">
+                <h3>🔹 9. Text Transform — تحويل النص</h3>
+                <p>بيتحكم في حالة الحروف (capital/small/uppercase).</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Text Transform</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.uppercase</span> <span class="punctuation">{</span>
+    <span class="property">text-transform</span><span class="punctuation">:</span> <span class="css-value">uppercase</span><span class="punctuation">;</span> <span class="comment">/* HELLO WORLD */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.lowercase</span> <span class="punctuation">{</span>
+    <span class="property">text-transform</span><span class="punctuation">:</span> <span class="css-value">lowercase</span><span class="punctuation">;</span> <span class="comment">/* hello world */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.capitalize</span> <span class="punctuation">{</span>
+    <span class="property">text-transform</span><span class="punctuation">:</span> <span class="css-value">capitalize</span><span class="punctuation">;</span> <span class="comment">/* Hello World */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">text-transform: uppercase</div>
+                <div class="demo-text" style="text-transform: uppercase; font-size: 1.2rem;">hello world — مرحباً</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">text-transform: lowercase</div>
+                <div class="demo-text" style="text-transform: lowercase; font-size: 1.2rem;">HELLO WORLD — مرحباً</div>
+            </div>
+
+            <div class="font-demo">
+                <div class="demo-label">text-transform: capitalize</div>
+                <div class="demo-text" style="text-transform: capitalize; font-size: 1.2rem;">hello world test — مرحباً بيك</div>
+            </div>
+
+            <!-- Google Fonts -->
+            <div class="card">
+                <h3>🔹 10. Google Fonts — خطوط ويب احترافية</h3>
+                <p>Google Fonts مكتبة مجانية فيها آلاف الخطوط. بنستخدمها عشان نضيف خطوط حلوة لموقعنا.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">HTML — إضافة Google Fonts</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="tag">&lt;head&gt;</span>
+    <span class="comment">&lt;!-- ربط الخط من Google Fonts --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="value">"preconnect"</span> <span class="attr">href</span>=<span class="value">"https://fonts.googleapis.com"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="value">"preconnect"</span> <span class="attr">href</span>=<span class="value">"https://fonts.gstatic.com"</span> <span class="attr">crossorigin</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="value">"https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap"</span> <span class="attr">rel</span>=<span class="value">"stylesheet"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span></code></pre>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — استخدام الخط</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">'Cairo', sans-serif</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">h1</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">'Cairo', sans-serif</span><span class="punctuation">;</span>
+    <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">900</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 نصيحة</h4>
+                <p>استخدم <code class="inline">display=swap</code> في الرابط عشان النص يظهر بسرعة حتى لو الخط لسه بيتحمل. وكمان اختار خط يدعم اللغة العربية لو هتستخدمها.</p>
+            </div>
+
+            <!-- Typography Summary -->
+            <div class="card">
+                <h3>📊 ملخص Typography Properties</h3>
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>الوظيفة</th>
+                            <th>مثال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>font-family</code></td>
+                            <td>نوع الخط</td>
+                            <td>'Cairo', sans-serif</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-size</code></td>
+                            <td>حجم الخط</td>
+                            <td>1rem, 16px</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-weight</code></td>
+                            <td>سمك الخط</td>
+                            <td>400, 700, bold</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-style</code></td>
+                            <td>مائل/عادي</td>
+                            <td>normal, italic</td>
+                        </tr>
+                        <tr>
+                            <td><code>line-height</code></td>
+                            <td>المسافة بين السطور</td>
+                            <td>1.5, 24px</td>
+                        </tr>
+                        <tr>
+                            <td><code>letter-spacing</code></td>
+                            <td>المسافة بين الحروف</td>
+                            <td>0, 2px, -1px</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-align</code></td>
+                            <td>محاذاة النص</td>
+                            <td>left, center, right, justify</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-decoration</code></td>
+                            <td>زخرفة النص</td>
+                            <td>underline, line-through, none</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-transform</code></td>
+                            <td>تحويل النص</td>
+                            <td>uppercase, lowercase, capitalize</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========== PART 2: BOX MODEL ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">📦</div>
+                <span>الجزء الثاني: Box Model — نموذج الصندوق</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هو Box Model؟</h3>
+                <p><strong>Box Model</strong> هو أهم مفهوم في CSS. كل عنصر في الصفحة هو <strong>"صندوق" (Box)</strong>، وكل صندوق بيتكون من 4 طبقات:</p>
+            </div>
+
+            <div class="analogy-box">
+                <h3>💡 تشبيه من الحياة</h3>
+                <p>تخيل إنك بتبعت <strong>هدية بالبريد</strong>:</p>
+                <ul class="analogy-list">
+                    <li><strong>Content</strong> = الهدية نفسها (المحتوى)</li>
+                    <li><strong>Padding</strong> = الفقاقيس البلاستيك حوالين الهدية (مسافة داخلية)</li>
+                    <li><strong>Border</strong> = كرتون العلبة (الحدود)</li>
+                    <li><strong>Margin</strong> = المسافة بين العلبة والعلب التانية (مسافة خارجية)</li>
+                </ul>
+            </div>
+
+            <!-- Box Model Visual -->
+            <div class="box-model-visual">
+                <h3 style="color: var(--primary-dark); margin-bottom: 20px;">📦 نموذج الصندوق (Box Model)</h3>
+                
+                <div class="box-model-diagram">
+                    <div class="box-margin">
+                        <div class="box-border">
+                            <div class="box-padding">
+                                <div class="box-content">Content</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: right;">
+                    <p style="padding: 8px 0;"><span style="display: inline-block; width: 20px; height: 20px; background: #F0DCDC; margin-left: 10px; vertical-align: middle;"></span> <strong>Margin:</strong> المسافة الخارجية (شفاف عادةً)</p>
+                    <p style="padding: 8px 0;"><span style="display: inline-block; width: 20px; height: 20px; background: #E8C9A0; margin-left: 10px; vertical-align: middle;"></span> <strong>Border:</strong> الحدود حول العنصر</p>
+                    <p style="padding: 8px 0;"><span style="display: inline-block; width: 20px; height: 20px; background: #D4E5D8; margin-left: 10px; vertical-align: middle;"></span> <strong>Padding:</strong> المسافة الداخلية</p>
+                    <p style="padding: 8px 0;"><span style="display: inline-block; width: 20px; height: 20px; background: var(--bg-card); border: 2px dashed var(--primary); margin-left: 10px; vertical-align: middle;"></span> <strong>Content:</strong> المحتوى نفسه</p>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="card">
+                <h3>🔹 1. Content — المحتوى</h3>
+                <p>المحتوى نفسه: النص، الصورة، الفيديو، أي حاجة جوه العنصر.</p>
+                <p>مقاس المحتوى بيتحدد بـ <code class="inline">width</code> و <code class="inline">height</code>.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Content Size</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">300</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">height</span><span class="punctuation">:</span> <span class="css-number">200</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <!-- Padding -->
+            <div class="card">
+                <h3>🔹 2. Padding — المسافة الداخلية</h3>
+                <p>المسافة بين <strong>المحتوى</strong> و <strong>الحدود (border)</strong>. المسافة دي جوه العنصر وبتأثر على حجمه.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Padding</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* نفس المسافة من كل الجهات */</span>
+<span class="selector">.box1</span> <span class="punctuation">{</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* علوي/سفلي | يمين/يسار */</span>
+<span class="selector">.box2</span> <span class="punctuation">{</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-number">40</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* علوي | يمين | سفلي | يسار (clockwise) */</span>
+<span class="selector">.box3</span> <span class="punctuation">{</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-number">40</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* كل جهة لوحدها */</span>
+<span class="selector">.box4</span> <span class="punctuation">{</span>
+    <span class="property">padding-top</span><span class="punctuation">:</span> <span class="css-number">10</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">padding-right</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">padding-bottom</span><span class="punctuation">:</span> <span class="css-number">30</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">padding-left</span><span class="punctuation">:</span> <span class="css-number">40</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <!-- Border -->
+            <div class="card">
+                <h3>🔹 3. Border — الحدود</h3>
+                <p>الحدود حول العنصر. ليها 3 خصائص: <strong>width, style, color</strong>.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Border</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Shorthand — كلهم في سطر */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">border</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="css-color-val">#4A7C59</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* كل property لوحدها */</span>
+<span class="selector">.box2</span> <span class="punctuation">{</span>
+    <span class="property">border-width</span><span class="punctuation">:</span> <span class="css-number">3</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">border-style</span><span class="punctuation">:</span> <span class="css-value">dashed</span><span class="punctuation">;</span>
+    <span class="property">border-color</span><span class="punctuation">:</span> <span class="css-color-val">#D4A574</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* border-radius — زوايا دائرية */</span>
+<span class="selector">.rounded</span> <span class="punctuation">{</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-number">10</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.circle</span> <span class="punctuation">{</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-number">50</span><span class="css-unit">%</span><span class="punctuation">;</span> <span class="comment">/* دائرة كاملة */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔍 Border Styles</h3>
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Style</th>
+                            <th>الشكل</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>solid</code></td>
+                            <td>خط مستمر</td>
+                            <td>الأكثر استخداماً</td>
+                        </tr>
+                        <tr>
+                            <td><code>dashed</code></td>
+                            <td>خط متقطع</td>
+                            <td>حدود مؤقتة</td>
+                        </tr>
+                        <tr>
+                            <td><code>dotted</code></td>
+                            <td>نقط</td>
+                            <td>تصاميم خاصة</td>
+                        </tr>
+                        <tr>
+                            <td><code>double</code></td>
+                            <td>خط مزدوج</td>
+                            <td>تصاميم خاصة</td>
+                        </tr>
+                        <tr>
+                            <td><code>none</code></td>
+                            <td>بدون حدود</td>
+                            <td>إزالة الحدود</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Margin -->
+            <div class="card">
+                <h3>🔹 4. Margin — المسافة الخارجية</h3>
+                <p>المسافة <strong>خارج</strong> العنصر، بينه وبين العناصر التانية. مش بتأثر على حجم العنصر نفسه.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Margin</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* نفس المسافة من كل الجهات */</span>
+<span class="selector">.box1</span> <span class="punctuation">{</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* علوي/سفلي | يمين/يسار */</span>
+<span class="selector">.box2</span> <span class="punctuation">{</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-number">40</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* علوي | يمين | سفلي | يسار */</span>
+<span class="selector">.box3</span> <span class="punctuation">{</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-number">40</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* توسيط العنصر أفقياً */</span>
+<span class="selector">.centered</span> <span class="punctuation">{</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-value">auto</span><span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">80</span><span class="css-unit">%</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 margin: 0 auto</h4>
+                <p>دي طريقة شهيرة لتوسيط عنصر أفقياً. لازم يكون للعنصر <code class="inline">width</code> محدد. الـ <code class="inline">auto</code> بيخلي المتصفح يقسم المسافة المتبقية بالتساوي على اليمين والشمال.</p>
+            </div>
+
+            <!-- Margin Collapse -->
+            <div class="card">
+                <h3>🔹 Margin Collapse — انهيار الهوامش</h3>
+                <p>لما يكون عندك عنصرين فوق بعض، واللي فوق عنده <code class="inline">margin-bottom: 30px</code> واللي تحت عنده <code class="inline">margin-top: 20px</code>، المسافة بينهم مش هتكون 50px — هتكون <strong>30px</strong> (الأكبر).</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ قاعدة Margin Collapse</h4>
+                <p>• بيحصل بس في الـ <strong>vertical margins</strong> (فوق/تحت).</p>
+                <p>• مش بيحصل في الـ <strong>horizontal margins</strong> (يمين/شمال).</p>
+                <p>• مش بيحصل لو العنصرين عندهم <code class="inline">padding</code> أو <code class="inline">border</code> بينهم.</p>
+                <p>• مش بيحصل في <strong>Flexbox</strong> و <strong>Grid</strong> (هنشوفهم بعدين).</p>
+            </div>
+
+            <!-- Box Sizing -->
+            <div class="card">
+                <h3>🔹 Box Sizing — طريقة حساب الحجم</h3>
+                <p>في طريقتين لحساب الحجم الكلي للعنصر:</p>
+            </div>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <span class="tag-name">content-box</span>
+                    <h5>الافتراضي</h5>
+                    <p><strong>width</strong> = المحتوى بس.<br>Padding + Border بيتضافوا فوق.</p>
+                    <p style="margin-top: 10px; font-size: 0.8rem; color: var(--danger);">⚠️ الحجم الكلي = width + padding + border</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">border-box</span>
+                    <h5>الأفضل ⭐</h5>
+                    <p><strong>width</strong> = المحتوى + padding + border.<br>أسهل في الحساب والتحكم.</p>
+                    <p style="margin-top: 10px; font-size: 0.8rem; color: var(--success);">✓ الحجم الكلي = width فقط</p>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Box Sizing</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* الطريقة الافتراضية */</span>
+<span class="selector">.content-box</span> <span class="punctuation">{</span>
+    <span class="property">box-sizing</span><span class="punctuation">:</span> <span class="css-value">content-box</span><span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">300</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">border</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="punctuation">;</span>
+    <span class="comment">/* الحجم الكلي = 300 + 40 + 4 = 344px */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* الطريقة الأفضل */</span>
+<span class="selector">.border-box</span> <span class="punctuation">{</span>
+    <span class="property">box-sizing</span><span class="punctuation">:</span> <span class="css-value">border-box</span><span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">300</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">border</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="punctuation">;</span>
+    <span class="comment">/* الحجم الكلي = 300px (ثابت) */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Global Reset — Best Practice */</span>
+<span class="selector">*</span> <span class="punctuation">{</span>
+    <span class="property">box-sizing</span><span class="punctuation">:</span> <span class="css-value">border-box</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ ليه border-box أفضل؟</h4>
+                <p>1. <strong>سهل الحساب:</strong> width = الحجم الكلي دايماً.</p>
+                <p>2. <strong>متوقع:</strong> لو حددت width: 300px، العنصر هيكون 300px فعلاً.</p>
+                <p>3. <strong>أسهل في Layout:</strong> مش هتفاجأ إن العنصر كبر لما ضفت padding أو border.</p>
+            </div>
+
+            <div class="danger-box">
+                <h4>🚨 لازم تعمل Reset</h4>
+                <p>دايماً حط الكود ده في أول ملف CSS:</p>
+                <p style="margin-top: 10px; font-family: 'Fira Code', monospace; direction: ltr; text-align: left; background: var(--bg-code); padding: 10px; border-radius: 6px; font-size: 0.9rem;">* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+            </div>
+
+            <!-- Box Model Calculation -->
+            <div class="card">
+                <h3>🧮 حساب الحجم الكلي</h3>
+                <p>مثال عملي على حساب الحجم الكلي لعنصر:</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">مثال حساب</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">300</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">border</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="punctuation">;</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">30</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* content-box (الافتراضي): */</span>
+<span class="comment">/* الحجم الكلي = 300 + (20×2) + (2×2) = 344px */</span>
+<span class="comment">/* المساحة المأخوذة = 344 + (30×2) = 404px */</span>
+
+<span class="comment">/* border-box: */</span>
+<span class="comment">/* الحجم الكلي = 300px (ثابت) */</span>
+<span class="comment">/* المساحة المأخوذة = 300 + (30×2) = 360px */</span></code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📊 مقارنة مرئية</h3>
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Box Sizing</th>
+                            <th>Width</th>
+                            <th>Padding</th>
+                            <th>Border</th>
+                            <th>الحجم الكلي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>content-box</code></td>
+                            <td>300px</td>
+                            <td>20px × 2</td>
+                            <td>2px × 2</td>
+                            <td><strong>344px</strong></td>
+                        </tr>
+                        <tr>
+                            <td><code>border-box</code></td>
+                            <td>300px</td>
+                            <td>20px × 2</td>
+                            <td>2px × 2</td>
+                            <td><strong>300px</strong> ✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========== Debugging Activity ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🐛</div>
+                <span>Debugging — اكتشف الأخطاء</span>
+            </h2>
+
+            <div class="debug-box">
+                <h3>🔍 نشاط: اكتشف الأخطاء في CSS ده</h3>
+                <p style="color: #5C2828;">الكود ده فيه <strong>5 أخطاء شائعة</strong> في Typography و Box Model.</p>
+
+                <div class="code-wrapper">
+                    <div class="code-header">
+                        <span class="code-lang">CSS — كود فيه أخطاء ❌</span>
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                    </div>
+<pre><code><span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">Cairo</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">300</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">20</span><span class="punctuation">;</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">10</span> <span class="css-number">20</span> <span class="css-number">30</span><span class="punctuation">;</span>
+    <span class="property">border</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-color-val">#4A7C59</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+                </div>
+
+                <div class="debug-comparison">
+                    <div class="debug-wrong">
+                        <div class="debug-label">❌ الأخطاء</div>
+                        <pre><code style="font-size: 0.85rem;">1. font-family ناقص quotes و fallback
+2. width ناقص وحدة (px)
+3. padding ناقص وحدة
+4. margin 3 values (لازم 1, 2, أو 4)
+5. border ناقص style (solid)</code></pre>
+                    </div>
+                    <div class="debug-right">
+                        <div class="debug-label">✅ الكود الصحيح</div>
+                        <pre><code style="font-size: 0.85rem;"><span class="selector">body</span> <span class="punctuation">{</span>
+  <span class="property">font-family</span>: <span class="css-value">'Cairo', sans-serif</span>;
+<span class="punctuation">}</span>
+
+<span class="selector">.card</span> <span class="punctuation">{</span>
+  <span class="property">width</span>: <span class="css-number">300</span><span class="css-unit">px</span>;
+  <span class="property">padding</span>: <span class="css-number">20</span><span class="css-unit">px</span>;
+  <span class="property">margin</span>: <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span>;
+  <span class="property">border</span>: <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="css-color-val">#4A7C59</span>;
+<span class="punctuation">}</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Mini Project ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎨</div>
+                <span>مشروع المحاضرة: Styled Article</span>
+            </h2>
+
+            <div class="card">
+                <h3>📋 المطلوب</h3>
+                <p>ابني <strong>صفحة مقال</strong> كاملة تحتوي على:</p>
+                <ul style="list-style: none; padding-right: 0; margin-top: 15px;">
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Google Fonts (Cairo أو خط عربي تاني)</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Typography كاملة: font-size, weight, line-height, letter-spacing</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> text-align, text-decoration, text-transform</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Box Model: padding, border, margin</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> box-sizing: border-box</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> border-radius</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> margin: 0 auto للتوسيط</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Global Reset (* { margin: 0; padding: 0; box-sizing: border-box; })</li>
+                </ul>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">index.html</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="value">"ar"</span> <span class="attr">dir</span>=<span class="value">"rtl"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="value">"viewport"</span> <span class="attr">content</span>=<span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span><span class="text">مقال عن البرمجة</span><span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="value">"preconnect"</span> <span class="attr">href</span>=<span class="value">"https://fonts.googleapis.com"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="value">"https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap"</span> <span class="attr">rel</span>=<span class="value">"stylesheet"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="value">"stylesheet"</span> <span class="attr">href</span>=<span class="value">"css/style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;article</span> <span class="attr">class</span>=<span class="value">"article-container"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;header</span> <span class="attr">class</span>=<span class="value">"article-header"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="value">"article-title"</span><span class="tag">&gt;</span><span class="text">تعلم البرمجة في 2024</span><span class="tag">&lt;/h1&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="value">"article-meta"</span><span class="tag">&gt;</span><span class="text">بقلم: أحمد محمد | 15 يناير 2024</span><span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/header&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"article-content"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p&gt;</span><span class="text">البرمجة هي مهارة المستقبل...</span><span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;h2&gt;</span><span class="text">لماذا تعلم البرمجة؟</span><span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;p&gt;</span><span class="text">هناك أسباب كثيرة...</span><span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;blockquote</span> <span class="attr">class</span>=<span class="value">"quote"</span><span class="tag">&gt;</span>
+                <span class="text">البرمجة ليست مجرد كتابة كود، بل هي طريقة تفكير.</span>
+            <span class="tag">&lt;/blockquote&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/article&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">css/style.css</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* ===== Global Reset ===== */</span>
+<span class="selector">*</span> <span class="punctuation">{</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">box-sizing</span><span class="punctuation">:</span> <span class="css-value">border-box</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Base Styles ===== */</span>
+<span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">'Cairo', sans-serif</span><span class="punctuation">;</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#FAF7F2</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#4A3728</span><span class="punctuation">;</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">1.8</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Article Container ===== */</span>
+<span class="selector">.article-container</span> <span class="punctuation">{</span>
+    <span class="property">max-width</span><span class="punctuation">:</span> <span class="css-number">800</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-value">auto</span><span class="punctuation">;</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#FFFFFF</span><span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-number">16</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">overflow</span><span class="punctuation">:</span> <span class="css-value">hidden</span><span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-value">rgba(74, 124, 89, 0.1)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Article Header ===== */</span>
+<span class="selector">.article-header</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient(135deg, #4A7C59 0%, #2D5F3F 100%)</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">3</span><span class="css-unit">rem</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">center</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.article-title</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">2.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">900</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#FFFFFF</span><span class="punctuation">;</span>
+    <span class="property">margin-bottom</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">letter-spacing</span><span class="punctuation">:</span> <span class="css-number">-0.5</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.article-meta</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">0.9</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">rgba(255, 255, 255, 0.8)</span><span class="punctuation">;</span>
+    <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">400</span><span class="punctuation">;</span>
+    <span class="property">text-transform</span><span class="punctuation">:</span> <span class="css-value">uppercase</span><span class="punctuation">;</span>
+    <span class="property">letter-spacing</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Article Content ===== */</span>
+<span class="selector">.article-content</span> <span class="punctuation">{</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">2.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.article-content</span> <span class="selector">p</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">1.1</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">1.8</span><span class="punctuation">;</span>
+    <span class="property">margin-bottom</span><span class="punctuation">:</span> <span class="css-number">1.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#4A3728</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.article-content</span> <span class="selector">h2</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">1.8</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">700</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#4A7C59</span><span class="punctuation">;</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">rem</span> <span class="css-number">0</span> <span class="css-number">1</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">padding-bottom</span><span class="punctuation">:</span> <span class="css-number">0.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">border-bottom</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="css-color-val">#D4E5D8</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Blockquote ===== */</span>
+<span class="selector">.quote</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#F5EFE6</span><span class="punctuation">;</span>
+    <span class="property">border-right</span><span class="punctuation">:</span> <span class="css-number">4</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="css-color-val">#D4A574</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">1.5</span><span class="css-unit">rem</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">rem</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">font-style</span><span class="punctuation">:</span> <span class="css-value">italic</span><span class="punctuation">;</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">1.2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#6B5744</span><span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">8</span><span class="css-unit">px</span> <span class="css-number">8</span><span class="css-unit">px</span> <span class="css-number">0</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ========== Summary ========== -->
+        <section>
+            <div class="summary-box">
+                <h3>📌 ملخص المحاضرة</h3>
+                <ul class="summary-list">
+                    <li>Typography = التحكم في الخطوط والنصوص</li>
+                    <li>font-family: نوع الخط (دايماً حط fallback)</li>
+                    <li>font-size: حجم الخط (استخدم rem)</li>
+                    <li>font-weight: سمك الخط (100-900, normal, bold)</li>
+                    <li>font-style: italic, normal, oblique</li>
+                    <li>line-height: المسافة بين السطور (1.5-1.8 للنصوص)</li>
+                    <li>letter-spacing: المسافة بين الحروف</li>
+                    <li>text-align: left, center, right, justify</li>
+                    <li>text-decoration: underline, line-through, none</li>
+                    <li>text-transform: uppercase, lowercase, capitalize</li>
+                    <li>Google Fonts: خطوط ويب مجانية واحترافية</li>
+                    <li>Box Model: Content + Padding + Border + Margin</li>
+                    <li>Padding = المسافة الداخلية، Margin = المسافة الخارجية</li>
+                    <li>box-sizing: border-box أفضل من content-box</li>
+                    <li>Global Reset: * { margin: 0; padding: 0; box-sizing: border-box; }</li>
+                    <li>margin: 0 auto لتوسيط عنصر أفقياً</li>
+                    <li>Margin Collapse: المسافة بين عنصرين عمودياً = الأكبر مش المجموع</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== Next Lecture ========== -->
+        <section>
+            <div class="next-box">
+                <h3>🚀 المحاضرة الجاية</h3>
+                <p>هنكمل رحلة CSS ونتعلم: <strong>Display + Position</strong></p>
+                <p>هنشوف إزاي نتحكم في طريقة عرض العناصر (Block, Inline, Inline-block, None)، وكمان إزاي نحدد مواقعها بدقة (Relative, Absolute, Fixed, Sticky).</p>
+                <span class="next-topic">المحاضرة القادمة: Display + Position</span>
+            </div>
+        </section>
+
+        <!-- ========== Quiz Section ========== -->
+        <section class="quiz-section">
+            <div class="quiz-header">
+                <div class="quiz-header-icon">❓</div>
+                <div>
+                    <h2>أسئلة اختيار من متعدد</h2>
+                    <p>10 أسئلة لاختبار فهمك لمحتوى المحاضرة</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 1</span>
+                <h4>ما هو property اللي بيحدد نوع الخط؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> font-style</li>
+                    <li><span class="option-letter">ب</span> font-family</li>
+                    <li><span class="option-letter">ج</span> font-weight</li>
+                    <li><span class="option-letter">د</span> text-font</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 2</span>
+                <h4>ما هي القيمة المثالية لـ line-height للنصوص الطويلة؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> 0.5</li>
+                    <li><span class="option-letter">ب</span> 1.0</li>
+                    <li><span class="option-letter">ج</span> 1.5 - 1.8</li>
+                    <li><span class="option-letter">د</span> 3.0</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 3</span>
+                <h4>ما هو الفرق بين padding و margin؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> مفيش فرق</li>
+                    <li><span class="option-letter">ب</span> padding = خارجي، margin = داخلي</li>
+                    <li><span class="option-letter">ج</span> padding = داخلي، margin = خارجي</li>
+                    <li><span class="option-letter">د</span> padding للخطوط، margin للألوان</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 4</span>
+                <h4>ما هي قيمة box-sizing الأفضل؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> content-box</li>
+                    <li><span class="option-letter">ب</span> border-box</li>
+                    <li><span class="option-letter">ج</span> padding-box</li>
+                    <li><span class="option-letter">د</span> margin-box</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 5</span>
+                <h4>ما هو property اللي بيحول النص لـ UPPERCASE؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> text-style: upper</li>
+                    <li><span class="option-letter">ب</span> font-transform: uppercase</li>
+                    <li><span class="option-letter">ج</span> text-transform: uppercase</li>
+                    <li><span class="option-letter">د</span> text-case: upper</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 6</span>
+                <h4>كيف توسط عنصر أفقياً بـ margin؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> margin: center</li>
+                    <li><span class="option-letter">ب</span> margin: 0 auto</li>
+                    <li><span class="option-letter">ج</span> margin: auto 0</li>
+                    <li><span class="option-letter">د</span> margin: middle</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 7</span>
+                <h4>ما هو Margin Collapse؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> المسافة بين عنصرين = مجموع الـ margins</li>
+                    <li><span class="option-letter">ب</span> المسافة بين عنصرين عمودياً = الـ margin الأكبر</li>
+                    <li><span class="option-letter">ج</span> إزالة كل الـ margins تلقائياً</li>
+                    <li><span class="option-letter">د</span> إضافة margins تلقائياً</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 8</span>
+                <h4>ما هو border-radius: 50% بيعمل؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> زوايا حادة</li>
+                    <li><span class="option-letter">ب</span> زوايا دائرية خفيفة</li>
+                    <li><span class="option-letter">ج</span> شكل دائري كامل</li>
+                    <li><span class="option-letter">د</span> إزالة الحدود</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 9</span>
+                <h4>ما هي أفضل وحدة لـ font-size؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> px</li>
+                    <li><span class="option-letter">ب</span> em</li>
+                    <li><span class="option-letter">ج</span> rem</li>
+                    <li><span class="option-letter">د</span> %</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 10</span>
+                <h4>ما هو Global Reset الصحيح؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> * { margin: 0; padding: 0; }</li>
+                    <li><span class="option-letter">ب</span> * { margin: 0; padding: 0; box-sizing: border-box; }</li>
+                    <li><span class="option-letter">ج</span> body { margin: 0; padding: 0; }</li>
+                    <li><span class="option-letter">د</span> * { box-sizing: content-box; }</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== Homework Section ========== -->
+        <section class="homework-section">
+            <div class="homework-header">
+                <div class="homework-header-icon">📝</div>
+                <div>
+                    <h2>واجبات المحاضرة</h2>
+                    <p>5 مسائل تطبيقية متدرجة لتثبيت ما تعلمته</p>
+                </div>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الأول: Typography Practice</h4>
+                <p>ابني صفحة فيها:</p>
+                <ul>
+                    <li>Google Font (Cairo أو خط عربي تاني)</li>
+                    <li>h1 بـ font-size: 3rem, font-weight: 900, text-align: center</li>
+                    <li>h2 بـ font-size: 2rem, font-weight: 700, text-transform: uppercase</li>
+                    <li>3 فقرات بـ line-height مختلفة (1, 1.5, 2)</li>
+                    <li>رابط بـ text-decoration: none</li>
+                    <li>نص بـ letter-spacing: 2px</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الثاني: Box Model Exploration</h4>
+                <p>ابني 3 boxes مختلفة:</p>
+                <ul>
+                    <li>Box 1: padding: 20px, border: 2px solid, margin: 30px</li>
+                    <li>Box 2: padding: 40px, border: 5px dashed, margin: 10px</li>
+                    <li>Box 3: padding: 10px 30px, border: 3px dotted, margin: 0 auto</li>
+                    <li>حساب الحجم الكلي لكل box (content-box vs border-box)</li>
+                    <li>استخدم ألوان مختلفة لكل طبقة عشان تشوف الفرق</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الثالث: Styled Card</h4>
+                <p>ابني "Card" احترافي يحتوي على:</p>
+                <ul>
+                    <li>Global Reset (* { margin: 0; padding: 0; box-sizing: border-box; })</li>
+                    <li>Google Fonts</li>
+                    <li>Card بـ width: 400px, padding: 2rem, border-radius: 16px</li>
+                    <li>Box shadow</li>
+                    <li>عنوان بـ font-size: 1.8rem, font-weight: 700</li>
+                    <li>فقرة بـ line-height: 1.6</li>
+                    <li>زر بـ padding: 12px 24px, border-radius: 8px</li>
+                    <li>Hover effect (هنشوفه في المحاضرة 12)</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الرابع: Article Page</h4>
+                <p>ابني صفحة مقال كاملة زي المثال في المحاضرة:</p>
+                <ul>
+                    <li>Header بـ background gradient + title + meta</li>
+                    <li>Content بـ paragraphs + headings + blockquote</li>
+                    <li>Typography كاملة: font-size, weight, line-height, letter-spacing</li>
+                    <li>Box Model: padding, margin, border</li>
+                    <li>border-radius للـ corners</li>
+                    <li>margin: 0 auto لتوسيط الـ container</li>
+                    <li>Responsive (هيشتغل على كل الشاشات)</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الخامس: التحدي — Blog Post</h4>
+                <p>ابني "Blog Post" احترافي يجمع كل اللي اتعلمته:</p>
+                <ul>
+                    <li>Global Reset + Google Fonts</li>
+                    <li>Header بـ background image + overlay + title</li>
+                    <li>Article content مع:
+                        <ul>
+                            <li>Typography كاملة (headings, paragraphs, lists)</li>
+                            <li>Blockquote بتصميم مميز</li>
+                            <li>Code blocks (للأكواد)</li>
+                            <li>Images مع captions</li>
+                        </ul>
+                    </li>
+                    <li>Author bio section بـ border + padding + margin</li>
+                    <li>Related posts section (3 cards)</li>
+                    <li>Footer بسيط</li>
+                    <li>استخدم كل الـ Typography properties</li>
+                    <li>استخدم Box Model بشكل صحيح</li>
+                    <li>نظم الملفات: index.html + css/style.css + images/</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                <span>Sunshine T Academy</span>
+            </div>
+            <p>Frontend Level 1 — HTML + CSS</p>
+            <p>بنحوّل الحلم لكود ☀️</p>
+            <p class="motto">Typography • Box Model • Padding • Margin • Border</p>
+        </div>
+    </footer>
+
+</body>
+</html>
